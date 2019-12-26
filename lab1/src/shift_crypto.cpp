@@ -31,9 +31,21 @@ void shift_all() {
     std::cout << "Cipher text:" << dst << std::endl;
 }
 
+const char hint[] = " _______________________________\n"
+                    "/ please input text(STRING) and \\\n"
+                    "\\ key(INTEGER) in order         /\n"
+                    " -------------------------------\n"
+                    "        \\   ^__^\n"
+                    "         \\  (oo)\\_______\n"
+                    "            (__)\\       )\\/\\\n"
+                    "                ||----w |\n"
+                    "                ||     ||\n"
+                    "text key> ";
+
 int main() {
     std::string input;
-    std::cout << "text key> ";
+    std::cout << hint;
+    std::cout.flush();
     while (std::cin >> input >> key) {
         src = input.c_str();
         length = input.length();
@@ -41,6 +53,7 @@ int main() {
         dst = new char[length + 1];
         shift_all();
         std::cout << "text key> ";
+        std::cout.flush();
     }
     return 0;
 }

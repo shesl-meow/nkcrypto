@@ -3,6 +3,8 @@ project(exe1)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(shift_crypto shift_crypto.cpp)
-add_executable(single_table_crypto single_table_crypto.cpp)
-add_executable(freq_analysis freq_analysis.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+
+add_executable(shift_crypto src/shift_crypto.cpp)
+add_executable(single_table_crypto src/single_table_crypto.cpp)
+add_executable(freq_analysis src/freq_analysis.cpp)

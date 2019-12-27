@@ -7,25 +7,19 @@
 #include "BitsetMethod.tpp"
 
 bitset128 Aes::Encrypt(bitset128 m) {
-    Squre4Marix state = Squre4Marix(m).Transpose();
+    auto state = new Squre4Marix(m);
 
-    state.ForEach([this](int r, int c, uint8_t *data) {
-        *data ^= (this->roundKey[0][r][c]);
-    }); // AddRoundKey
-
-    for (int i = 1; i < 11; i++) {
-        state.ForEach([](int r, int c, uint8_t *data) {
-            *data = SBOX[*data];
-        }); // ByteSubstitution
-
-        state.ShiftRows();
-        if (i != 10) state.MixColumns();
-
-        state.ForEach([this, i](int r, int c, uint8_t *data) {
-            *data ^= (this->roundKey[i][r][c]);
-        }); // AddRoundKey
+    this->AddRoundKey(state, 0);
+    for (int i = 1; i < 10; i++) {
+        this->RoundEncrypt(state, i);
     }
-    return state.Transpose().collapse();
+    state->ByteSubstitution(SBOX);
+    state->ShiftRows();
+    this->AddRoundKey(state, 10);
+
+    bitset128 cipher = state->collapse();
+    delete state;
+    return cipher;
 }
 
 void Aes::KeyExpansion(bitset128 key) {
@@ -45,5 +39,18 @@ void Aes::KeyExpansion(bitset128 key) {
     }
 }
 
+void Aes::AddRoundKey(Squre4Marix *state, uint8_t round) {
+    assert(round >= 0 && round <= 10);
+    state->ForEach([this, round](int r, int c, uint8_t *data) {
+        *data ^= (this->roundKey[round][r][c]);
+    });
+}
 
+void Aes::RoundEncrypt(Squre4Marix *state, uint8_t round) {
+    assert(round > 0 && round < 10);
+    state->ByteSubstitution(SBOX);
+    state->ShiftRows();
+    state->MixColumns();
+    this->AddRoundKey(state, round);
+}
 

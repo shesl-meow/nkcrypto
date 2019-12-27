@@ -76,7 +76,7 @@ Squre4Marix &Squre4Marix::Transpose() {
 Squre4Marix &Squre4Marix::ShiftRows() {
     Squre4Marix temp = *this;
     this->ForEach([temp](int r, int c, uint8_t *element) {
-        *element = temp[r][(r + c) % 4];
+        *element = temp[(r + c) % 4][c];
     });
     return *this;
 }
@@ -94,6 +94,13 @@ Squre4Marix &Squre4Marix::MixColumns() {
         r[2] ^= t ^ xtime(r[2] ^ r[3]);
         r[3] ^= t ^ xtime(r[3] ^ u);
     }
+    return *this;
+}
+
+Squre4Marix &Squre4Marix::ByteSubstitution(const uint8_t SBOX[256]) {
+    this->ForEach([SBOX](int r, int c, uint8_t *element) {
+        *element = SBOX[*element];
+    });
     return *this;
 }
 

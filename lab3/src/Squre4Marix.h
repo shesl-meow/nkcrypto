@@ -36,6 +36,8 @@ public:
 
     Squre4Marix &MixColumns();
 
+    Squre4Marix &ByteSubstitution(const uint8_t SBOX[256]);
+
     Squre4Marix &ForEach(const std::function<void(int, int, uint8_t *)> &f);
 
     const uint8_t *operator[](int ind) const {
@@ -43,7 +45,8 @@ public:
     }
 
     Squre4Marix &operator=(const Squre4Marix &given) {
-        return this->ForEach([given](int r, int c, uint8_t *d) { *d = given[r][c]; });
+        this->ForEach([given](int r, int c, uint8_t *d) { *d = given[r][c]; });
+        return *this;
     }
 };
 

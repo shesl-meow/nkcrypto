@@ -28,6 +28,10 @@ public:
 
 private:
     void KeyExpansion(bitset128 key);
+
+    void AddRoundKey(Squre4Marix *state, uint8_t round);
+
+    void RoundEncrypt(Squre4Marix *state, uint8_t round);
 };
 
 

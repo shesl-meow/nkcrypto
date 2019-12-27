@@ -4,7 +4,6 @@
 
 #include "../include/Aes.h"
 #include "AesConst.h"
-#include "BitsetMethod.tpp"
 
 bitset128 Aes::Encrypt(bitset128 m) {
     auto state = new Squre4Marix(m);
@@ -76,6 +75,34 @@ void Aes::RoundDecrypt(Squre4Marix *state, uint8_t round) {
     state->MixColumns(true);
     state->ShiftRows(true);
     state->ByteSubstitution(INV_SBOX);
+}
+
+std::vector<size_t> Aes::AvalancheTestEnc(bitset128 m) {
+    this->KeyExpansion(rawKey);
+    bitset128 cipher, rawcipher = this->Encrypt(m);
+    std::vector<size_t > result;
+    for (size_t i = 0; i < 128; ++i) {
+        bitset128 mask = 1llu << i;
+        this->KeyExpansion(rawKey ^ mask);
+        cipher = this->Encrypt(m);
+        result.push_back((cipher ^ rawcipher).count());
+    }
+    this->KeyExpansion(rawKey);
+    return result;
+}
+
+std::vector<size_t> Aes::AvalancheTestDec(bitset128 c) {
+    this->KeyExpansion(rawKey);
+    bitset128 cipher, rawcipher = this->Decrypt(c);
+    std::vector<size_t > result;
+    for (size_t i = 0; i < 128; ++i) {
+        bitset128 mask = 1llu << i;
+        this->KeyExpansion(rawKey ^ mask);
+        cipher = this->Decrypt(c);
+        result.push_back((cipher ^ rawcipher).count());
+    }
+    this->KeyExpansion(rawKey);
+    return result;
 }
 
 

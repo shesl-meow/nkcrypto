@@ -15,5 +15,5 @@ target_include_directories(AesExport
         ${CMAKE_CURRENT_SOURCE_DIR}/src/
 )
 
-add_executable(lab3 main.cpp)
+add_executable(lab3 main.cpp TestCase.h)
 target_link_libraries(lab3 AesExport)

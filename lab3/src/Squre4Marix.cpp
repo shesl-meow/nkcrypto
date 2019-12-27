@@ -73,20 +73,35 @@ Squre4Marix &Squre4Marix::Transpose() {
 }
 
 
-Squre4Marix &Squre4Marix::ShiftRows() {
+Squre4Marix &Squre4Marix::ShiftRows(bool isinv) {
     Squre4Marix temp = *this;
-    this->ForEach([temp](int r, int c, uint8_t *element) {
-        *element = temp[(r + c) % 4][c];
-    });
+    if (isinv) {
+        this->ForEach([temp](int r, int c, uint8_t *element) {
+            *element = temp[(r - c + 4) % 4][c];  // NOTICE: -1%4 == -1
+        });
+    } else {
+        this->ForEach([temp](int r, int c, uint8_t *element) {
+            *element = temp[(r + c) % 4][c];
+        });
+    }
     return *this;
 }
 
-Squre4Marix &Squre4Marix::MixColumns() {
+Squre4Marix &Squre4Marix::MixColumns(bool isinv) {
     // learnt from http://cs.ucsb.edu/~koc/cs178/projects/JT/aes.c
     static const auto xtime = [](uint8_t x) -> uint8_t {
         return (x & 0x80u) ? (((x << 1u) ^ 0x1Bu) & 0xFFu) : x << 1u;
     };
 
+    if (isinv) {
+        for (auto r : this->data) {
+            uint8_t u = xtime(xtime(r[0] ^ r[2])), v = xtime(xtime(r[1] ^ r[3]));
+            r[0] ^= u;
+            r[1] ^= v;
+            r[2] ^= u;
+            r[3] ^= v;
+        }
+    }
     for (auto r : this->data) {
         uint8_t t = r[0] ^r[1] ^r[2] ^r[3], u = r[0];
         r[0] ^= t ^ xtime(r[0] ^ r[1]);

@@ -14,12 +14,28 @@ bitset128 Aes::Encrypt(bitset128 m) {
         this->RoundEncrypt(state, i);
     }
     state->ByteSubstitution(SBOX);
-    state->ShiftRows();
+    state->ShiftRows(false);
     this->AddRoundKey(state, 10);
 
     bitset128 cipher = state->collapse();
     delete state;
     return cipher;
+}
+
+bitset128 Aes::Decrypt(bitset128 c) {
+    auto state = new Squre4Marix(c);
+
+    this->AddRoundKey(state, 10);
+    state->ShiftRows(true);
+    state->ByteSubstitution(INV_SBOX);
+    for (int i = 9; i > 0; i--) {
+        this->RoundDecrypt(state, i);
+    }
+    this->AddRoundKey(state, 0);
+
+    bitset128 plain = state->collapse();
+    delete state;
+    return plain;
 }
 
 void Aes::KeyExpansion(bitset128 key) {
@@ -49,8 +65,17 @@ void Aes::AddRoundKey(Squre4Marix *state, uint8_t round) {
 void Aes::RoundEncrypt(Squre4Marix *state, uint8_t round) {
     assert(round > 0 && round < 10);
     state->ByteSubstitution(SBOX);
-    state->ShiftRows();
-    state->MixColumns();
+    state->ShiftRows(false);
+    state->MixColumns(false);
     this->AddRoundKey(state, round);
 }
+
+void Aes::RoundDecrypt(Squre4Marix *state, uint8_t round) {
+    assert(round > 0 && round < 10);
+    this->AddRoundKey(state, round);
+    state->MixColumns(true);
+    state->ShiftRows(true);
+    state->ByteSubstitution(INV_SBOX);
+}
+
 

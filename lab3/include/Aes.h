@@ -20,7 +20,7 @@ public:
 
     bitset128 Encrypt(bitset128 m);
 
-    unsigned char *InvCipher(unsigned char *input);
+    bitset128 Decrypt(bitset128 c);
 
     void *Cipher(void *input, int length = 0);
 
@@ -32,6 +32,8 @@ private:
     void AddRoundKey(Squre4Marix *state, uint8_t round);
 
     void RoundEncrypt(Squre4Marix *state, uint8_t round);
+
+    void RoundDecrypt(Squre4Marix *state, uint8_t round);
 };
 
 

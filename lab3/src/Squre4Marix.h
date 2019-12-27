@@ -32,9 +32,9 @@ public:
 
     Squre4Marix &Transpose();
 
-    Squre4Marix &ShiftRows();
+    Squre4Marix &ShiftRows(bool isinv = false);
 
-    Squre4Marix &MixColumns();
+    Squre4Marix &MixColumns(bool isinv = false);
 
     Squre4Marix &ByteSubstitution(const uint8_t SBOX[256]);
 

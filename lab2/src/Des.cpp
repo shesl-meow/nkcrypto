@@ -81,7 +81,6 @@ std::vector<size_t> Des::AvalancheTestDec(bitset64 c) {
         result.push_back((cipher ^ rawcipher).count());
     }
     this->updateFinalKey(rawKey);
-    std::reverse(result.begin(), result.end());
     return result;
 }
 

@@ -13,9 +13,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f617c735-bbc0-4675-ab89-a0e32a2582e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab3/TestCase.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab2" beforeDir="false" afterPath="$PROJECT_DIR$/bin/lab2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Des.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Des.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/include/Aes.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/include/Aes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/src/Aes.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/src/Aes.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +91,10 @@
       <updated>1577258958316</updated>
       <workItem from="1577258959978" duration="3147000" />
       <workItem from="1577263591687" duration="39672000" />
-      <workItem from="1577349830812" duration="250000" />
+      <workItem from="1577349830812" duration="336000" />
+      <workItem from="1577353916201" duration="240000" />
+      <workItem from="1577378947027" duration="3466000" />
+      <workItem from="1577438660039" duration="1664000" />
     </task>
     <servers />
   </component>
@@ -96,7 +106,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -106,6 +118,8 @@
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="this-&gt;finalKey" language="ObjectiveC" />
+        <watch expression="(int *)&amp;m_1" language="ObjectiveC" />
+        <watch expression="m_1.to_ullong()" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>

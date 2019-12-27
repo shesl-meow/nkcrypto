@@ -1,4 +1,5 @@
 #include <iostream>
+#include <numeric>
 #include "Des.h"
 #include "TestCase.h"
 #include "src/BitsetMethod.tpp"
@@ -6,6 +7,9 @@
 using namespace std;
 
 int main() {
+    static auto avg = [](std::vector<size_t> v) -> double {
+        return std::accumulate(v.begin(), v.end(), 0.0) / v.size();
+    };
     for (const auto & testCase : testCases) {
         auto key = BitsetMethod::convertFrom<64>((void *) testCase.key, 8);
         auto rplain = BitsetMethod::convertFrom<64>((void *) testCase.txt, 8);
@@ -20,8 +24,8 @@ int main() {
                 auto cipher = des->Encode(rplain);
                 cout << "CalcCipher:\t" << rcipher << endl;
 
-                cout << "Avalance test:\t";
                 auto avalanche = des->AvalancheTestEnc(rplain);
+                cout << "Avalance test: (Average " << avg(avalanche) << ")\t" << endl;
                 for (auto av: avalanche) cout << av << " ";
                 cout << endl;
             }
@@ -30,8 +34,8 @@ int main() {
                 auto plain = des->Decode(rcipher);
                 cout << "CalcPlain:\t" << plain << endl;
 
-                cout << "Avalance test:\t";
                 auto avalanche = des->AvalancheTestDec(rcipher);
+                cout << "Avalance test: (Average " << avg(avalanche) << ")\t" << endl;
                 for (auto av: avalanche) cout << av << " ";
                 cout << endl;
             }

@@ -17,6 +17,8 @@ public:
     mpz_class Encrypt(mpz_class m);
 
     mpz_class Decrypt(mpz_class c);
+
+    static mpz_class GeneratePrime(size_t nbits);
 };
 
 

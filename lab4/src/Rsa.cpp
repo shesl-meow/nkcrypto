@@ -5,13 +5,13 @@
 #include "../include/Rsa.h"
 
 Rsa::Rsa(mpz_class prime_p, mpz_class prime_q, mpz_class pow_e) {
-    mpz_init(p), mpz_init(q), mpz_init(e);
+    mpz_inits(p, q, e, NULL);
     mpz_set(p, prime_p.get_mpz_t());
     mpz_set(q, prime_q.get_mpz_t());
     mpz_set(e, pow_e.get_mpz_t());
 
     mpz_t phi;
-    mpz_init(n), mpz_init(phi), mpz_init(d);
+    mpz_inits(n, phi, d, NULL);
     mpz_mul(n, p, q);
     mpz_mul(phi, p-1, q-1);
     mpz_invert(d, e, phi);
@@ -32,4 +32,15 @@ mpz_class Rsa::Decrypt(mpz_class c) {
     mpz_class message = mpz_class(m);
     mpz_clear(m);
     return message;
+}
+
+mpz_class Rsa::GeneratePrime(size_t nbits) {
+    gmp_randstate_t r_state;
+    gmp_randinit_default(r_state);
+    gmp_randseed_ui(r_state, time(0));
+
+    mpz_t prime; mpz_init(prime);
+    mpz_urandomb(prime, r_state, nbits);
+    mpz_nextprime(prime, prime);
+    return mpz_class(prime);
 }

@@ -38,16 +38,19 @@ mpz_class Rsa::Decrypt(mpz_class c) {
 }
 
 mpz_class Rsa::GeneratePrime(size_t nbits) {
-    gmp_randstate_t r_state;
-    gmp_randinit_default(r_state);
-    gmp_randseed_ui(r_state, time(nullptr));
+    static time_t seed;
+    static gmp_randstate_t random_state;
+    if (!seed) {
+        seed = time(nullptr);
+        gmp_randinit_mt(random_state);
+        gmp_randseed_ui(random_state, seed);
+    }
 
     mpz_t prime; mpz_init(prime);
-    mpz_urandomb(prime, r_state, nbits);
+    mpz_urandomb(prime, random_state, nbits);
     mpz_nextprime(prime, prime);
 
     mpz_class result = mpz_class(prime);
     mpz_clear(prime);
-    gmp_randclear(r_state);
     return mpz_class(prime);
 }

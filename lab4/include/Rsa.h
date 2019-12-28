@@ -4,11 +4,13 @@
 
 #ifndef LAB4_RSA_H
 #define LAB4_RSA_H
+
 #include "gmpxx.h"
 
 class Rsa {
 private:
     mpz_t p{}, q{}, d{};
+
 public:
     mpz_t n{}, e{};
 

@@ -31,16 +31,22 @@
 
 ### MAC OS
 
-作者开发所用的操作系统，直接编译即可：
+作者开发所用的操作系统，需要安装依赖：
 
 ```bash
-$ cmake
+# cmake 编译套件
+$ brew install cmake
+
+# 如果是 lab4 要需要安装大整数库
+$ brew install gmp
 ```
 
-对于 lab4，还需要额外安装大整数库：
+直接编译即可：
 
 ```bash
-$ brew install gmp
+$ cmake CMakeLists.txt
+
+$ make
 ```
 
 ### Ubuntu

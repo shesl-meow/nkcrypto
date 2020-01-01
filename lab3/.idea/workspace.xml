@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="Aes" targetName="AesExport" />
       <config projectName="Aes" targetName="lab3" />
+      <config projectName="Aes" targetName="AesExport" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -13,8 +13,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eae51747-2bd2-4ea7-9e63-aced46b992e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/bin/lab2" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/bin/lab2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/lab3" beforeDir="false" afterPath="$PROJECT_DIR$/bin/lab3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +91,8 @@
       <workItem from="1577350401994" duration="176000" />
       <workItem from="1577350590379" duration="9000" />
       <workItem from="1577350647321" duration="171000" />
-      <workItem from="1577352381430" duration="36791000" />
+      <workItem from="1577352381430" duration="36928000" />
+      <workItem from="1577874575689" duration="261000" />
     </task>
     <servers />
   </component>

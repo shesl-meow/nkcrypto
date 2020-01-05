@@ -27,8 +27,6 @@ public:
 
     std::string hexdigest() const;
 
-    friend std::ostream &operator<<(std::ostream &, Md5Hash md5);
-
 private:
     void transform(const uint8_t block[64u]);
 

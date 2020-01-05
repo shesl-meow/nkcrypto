@@ -73,7 +73,6 @@ inline void encode(uint8_t output[], const uint32_t input[], size_t len)
 
 //////////////////////////////
 // apply MD5 algo on a block
-#include <iostream>
 void Md5Hash::transform(const uint8_t block[64])
 {
     static const bitset128 mask128 = (1ul << 32u) - 1;
@@ -83,20 +82,6 @@ void Md5Hash::transform(const uint8_t block[64])
     uint32_t C = (digest >> (32u * 1) & mask128).to_ullong(), c = C;
     uint32_t D = (digest >> (32u * 0) & mask128).to_ullong(), d = D;
     uint32_t x[16], y[16];
-    for (int i = 0; i < 512; i +=8) {
-        std::cout << std::hex << ((pblock >> (512 - 8 - i)) & bitset512(0xffu)).to_ullong();
-    }
-    std::cout << std::endl;
-    for (int i = 0; i < 64; i += 1) {
-        std::cout << std::hex << int(block[i]);
-    }
-    std::cout << std::endl;
-    decode (x, block, 64);
-    for (int i = 0; i < 512; i += 32) {
-        y[i] = ((pblock >> (512u - 32 - i)) & mask512).to_ullong();
-        std::cout << std::hex << x[i] << std::endl;
-        std::cout << std::hex << y[i] << std::endl;
-    }
 
     /* Round 1 */
     FF (a, b, c, d, x[ 0], S11, 0xd76aa478); /* 1 */
